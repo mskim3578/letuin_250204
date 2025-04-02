@@ -281,3 +281,169 @@ print("100원 동전의 갯수", money%500//100)
 print("50원 동전의 갯수", money%100//50)
 print("10원 동전의 갯수", money%50//10)
 print("1원 동전의 갯수", money%10)
+
+
+
+### 조건문 : if문
+# 들여쓰기 해야함
+
+score = 65
+if score >= 90 :
+    print("A학점")
+    print("합격입니다.")
+else : 
+    if score >= 80 :
+        print("B학점")
+        print("합격입니다.")
+    else :
+       if score >= 70 :
+         print("C학점")
+         print("합격입니다.")
+       else :
+        if score >= 60 :
+               print("D학점")
+        else :
+            print("F학점")
+            
+            
+            
+# if elif 구문
+if score >= 90 :
+   print("A학점")                
+   print("합격입니다.")
+elif score >= 80 :
+   print("B학점")                
+   print("합격입니다.")
+elif score >= 70 :
+    print("B학점")                
+    print("합격입니다.")
+elif score >= 60 :
+   print("D학점")                
+   print("합격입니다.")
+else :
+   print("F학점")                
+   print("불합격입니다.")     
+
+
+score = 70    
+if(score >= 60) :
+   print("합격입니다.")
+   print("자격증을 받으러 오세요")   
+   
+   
+
+# 간단한 조건식
+# TRUE if 조건식 else FALSE
+score = 65
+print(score,"점수는",'PASS' if score>=60 else 'FAIL')       
+    
+
+
+
+    
+# 반복문
+#1부터 100까지의 합 구하기
+num = 100
+hap = 0
+# range(1,num+1,증감값) : 1 ~ num까지의 숫자들
+for i in range(1,num+1) :
+    hap += i
+print ("1부터 %d까지의 합:%d" % (num,hap))   
+
+
+#1 ~ 100 까지 짝수의 합 구하기
+
+hap=0
+for i in range(1,num+1) :
+    if i % 2== 0 :
+       hap += i
+print ("1부터 %d까지의 짝수합:%d" % (num,hap))   
+
+
+hap=0
+for i in range(2,num+1,2) :
+    hap += i
+print ("1부터 %d까지의 짝수합:%d" % (num,hap))   
+
+#12345 반복문을 이용하여 출력하기
+print(12345)
+
+for i in range(1,6) :
+    print(i,end="")
+
+
+# while 조건문: 조건문의 결과가 참인 동안 반복함
+num = 1
+while num <= 5 :
+  print(num, end="")
+  num += 1      
+
+#break : 반복문 종료
+#continue : 반복문의 처음으로 제어 이동
+hap = 0
+for i in range(1,11) : #1 ~ 10
+   if i == 5 :
+       break;
+   hap += i
+print('hap=',hap) # 10   
+
+
+hap = 0
+for i in range(1,11) :
+   if i == 5 :
+       continue
+   hap += i
+print('hap=',hap)  # 50  
+
+
+###-----
+#중첩반복문 (구구단)
+i,j=0,0  #초기화 방식
+for i in range(2,10) :  # 2 ~ 9
+    print("%5d단" % i)
+    for j in range(2,10) : # 2 ~ 9
+        print("%2d X %2d = %3d" % (i,j,(i*j)))
+    print()   
+
+
+###---
+'''
+1. 직각 삼각형 출력하기
+
+*
+**
+***
+****
+*****
+
+'''
+
+h=5
+### 1 ####
+for i in range(1,h+1) :
+   for j in range(1,i+1) :
+       print("*",end="")
+   print()    
+
+### 2 ####
+for i in range(1,h+1) :
+   print("*"*i)   
+
+###-----
+'''
+2. 역 직각 삼각형 출력하기
+
+*****
+****
+***
+**
+*
+'''
+for i in range(h,0,-1) :
+   for j in range(1,i+1) :
+       print("*",end="")
+   print()    
+
+for i in range(h,0,-1) :
+   print("*"*i)
+
