@@ -1,1 +1,11 @@
+#1 find를 이용한 문자 찾기
+strpos = []
+index=0
+while True :
+    index = mystr.find("파이썬",index) #index 이후부터 검색 
+    if index < 0: #없다
+        break
+    strpos.append(index)  #0,13
+    index += 1            #14
+print(strpos)      #[0, 13]
 
