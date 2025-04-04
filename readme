@@ -1,14 +1,4 @@
    
-#mystr 문자열에 파이썬 문자의 위치를 strpos 리스트에 저장하기
-mystr = "파이썬 공부 중입니다. 파이썬을 열심히 공부합시다"
-#1 find를 이용한 문자 찾기
-strpos = []
-index=0
-while True :
-    index = mystr.find("파이썬",index) #index 이후부터 검색 
-    if index < 0: #없다
-        break
-    strpos.append(index)  #0,13
-    index += 1            #14
-print(strpos)      #[0, 13]
+df = pd.DataFrame([[15,'남','서울중'],[17,'여','서울여고'],
+                   [17,'남','서울고']])
 
