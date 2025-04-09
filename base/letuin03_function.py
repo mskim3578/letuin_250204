@@ -104,6 +104,27 @@ print(hap1(10))  #num1=10,num2=1 기본값 설정
 print(hap1(10,20)) #num1=10,num2=20
 print(hap1(0,20))  #num1=0,num2=20
 
+############ dictionary parameter
+def funcdic(a=1,b=2,c=3):
+    print(a,b,c)
+
+def func(a,b,c):
+    print(a,b,c)    
+
+funcdic(10,20,30)  #10 20 30
+func(10,20,30)  #10 20 30
+
+funcdic(10,20)  #10 20 3
+func(10,20)  #error
+
+funcdic(b=100)  #1 100 3 
+func(b=100)  #error
+
+
+    
+
+
+
 ###---
 # 람다식을 이용한 함수
 hap2=lambda num1,num2:num1+num2  
