@@ -436,16 +436,150 @@ t_df.age.min()
 t_df.age.value_counts()
 t_df.age.value_counts().head()
 
+t_df.age
+t_df['age']
+t_df.age.unique()
+
 #인원수가 많은 나이 10개 조회 
 t_df.age.value_counts().head(10)
 
+#승객 중 최고령자의 정보 조회하기  t_df[조건식식]
+#1.
+t_df[t_df['age']==t_df['age'].max()]
 
 
 
+#2.
+maxindex=t_df['age'].idxmax()
+t_df.iloc[maxindex]
+type(t_df.iloc[maxindex])
 
+# 데이터에서 생존건수(342), 사망건수(549) 조회하기
+alive_df=titanic[['alive','survived']]
+alive_df['alive'].value_counts()
+alive_df['survived'].value_counts()
 
+#성별로 인원수 조회하기 
+sex_df=titanic[['sex','who']]
+sex_df['sex'].value_counts()  # male, female
+sex_df['who'].value_counts()   # man, woman, child
+t_df.info()
 
+#성별로 생존건수 조회하기
 
+cnt=titanic[['sex', 'survived']].value_counts()
+type(cnt)
+cnt.index
 
+# 컬럼 : 변수,피처 용어사용.
+# 상관 계수 : -1 ~ 1사이의 값. 변수의 상관관계 수치로 표현
+# correlation coefficient
 
-    
+titanic[["survived","age"]].corr()
+'''
+          survived       age
+survived  1.000000 -0.077221
+age      -0.077221  1.000000
+'''
+###########  결측치 처리
+
+titanic.info()
+#deck   선실 고유 번호 가장 앞자리 알파벳
+titanic.deck.unique()
+'''
+[NaN, 'C', 'E', 'G', 'D', 'A', 'B', 'F']
+Categories (7, object): ['A', 'B', 'C', 'D', 'E', 'F', 'G']  
+'''
+# deck 컬럼의  값별 건수
+titanic.deck.value_counts()
+
+#결측값을 포함한 값의 건수
+titanic.deck.value_counts(dropna=False)
+
+titanic.deck.head()
+#isnull() : 결측값? 결측값인 경우 True, 일반값:False
+titanic.deck.head().isnull()
+#notnull() : 결측값아님? 결측값인 경우 False, 일반값:True
+titanic.deck.head().notnull()
+
+titanic.isnull().sum()    #컬럼별 결측값 갯수
+titanic.isnull().sum(axis=0)   #컬럼별 결측값 갯수
+titanic.isnull().sum(axis=1)    # index 결측값 갯수
+
+titanic.notnull().sum()    #컬럼별 결측값 갯수
+titanic.notnull().sum(axis=0)   #컬럼별 결측값 갯수
+titanic.notnull().sum(axis=1)    # index 결측값 갯수
+
+#######################
+#dropna : 결측값 제거 
+#         inplace=True 있어야 자체 변경 가능
+# 결측값이 500개 이상인 컬럼 제거하기
+# axis=1 column
+# axis=0 index
+# thresh=500 : 결측값의 갯수가 500 이상
+
+df_tresh = titanic.dropna(axis=1,thresh=500)
+df_tresh.info()  #deck 지워짐
+
+#결측값을 가진 행을 제거
+#subset=["age"] : 컬럼 설정.
+#how='any'/'all' : 한개만결측값/모든값이 결측값
+# axis=0 : 행
+df_age=titanic.dropna(subset=['age'], how='any', axis=0)
+df_age.info()
+
+########################
+# fillna : 결측값을 다른값으로 치환.
+#          inplace=True가 있어야 자체 객체 변경
+
+# fillna(치환할값,옵션)
+#1. age 컬럼의 값이 결측값인 경우 평균 나이로 변경하기
+#1. age 컬럼의 평균나이 조회하기
+
+age_mean=titanic['age'].mean()
+titanic['age'].fillna(age_mean, inplace=True)
+titanic.info()
+
+#2. embark_town 컬럼의 결측값은 빈도수가 가장 많은 
+#   데이터로 치환하기
+# embark_town 중 가장 건수가 많은 값을 조회하기
+# value_counts() 함수 결과의 첫번째 인덱스값.-가장 큰수
+titanic['embark_town'].value_counts()
+'''
+>>> titanic['embark_town'].value_counts()
+embark_town
+Southampton    644
+Cherbourg      168
+Queenstown      77
+Name: count, dtype: int64
+'''
+max_etown=titanic['embark_town'].value_counts().index[0] 
+max_etown=titanic['embark_town'].value_counts().idxmax()#Southampton
+# embark_town 컬럼의 결측값에 max_etown 값을 치환하기
+# embark_town 
+
+titanic[titanic['embark_town'].isnull()] #61, 829
+titanic.iloc[[61,829]]["embark_town"]
+titanic["embark_town"].fillna(max_etown,inplace=True) #결측값을 수정
+titanic.iloc[[61,829]]["embark_town"] #결측값 변경 확인
+titanic.info()
+
+# embarked 컬럼을 앞, 뒤 의 값으로 치환하기
+#1.embarked 컬럼의 값이 결측값인 레코드 조회하기
+# titanic = sns.load_dataset("titanic")  # 초기화
+titanic[titanic['embarked'].isnull()]
+
+titanic.iloc[[61,829]]["embarked"]
+titanic["embarked"][58:65] #61:C
+titanic["embarked"][825:831] #829:Q
+
+#앞의 데이터로 치환하기
+# method="ffill" : 앞의 데이터로 치환
+# method="bfill" : 뒤의 데이터로 치환
+# method="backfill" : 뒤의 데이터로 치환
+titanic['embarked'].fillna(method='ffill', inplace=True)
+
+titanic = sns.load_dataset("titanic")  # 초기화
+titanic['embarked'].ffill(inplace=True)
+titanic["embarked"][58:65] #61:C
+titanic["embarked"][825:831] #829:Q
