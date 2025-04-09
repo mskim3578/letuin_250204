@@ -1,5 +1,7 @@
 import pandas as pd
 # pip install pandas
+import seaborn as sns #시각화모듈
+# pip install seaborn   #cmd
 
 #튜플 데이터를 Series 데이터로
 tuple_data = ("홍길동",'1991-01-25','남',True)
@@ -329,3 +331,121 @@ df
 #               기본값 True
 df.to_csv("data/df_jeju1.csv",index=False) #index 제외
 df.to_csv("data/df_jeju2.csv")  #index 포함
+
+
+#excel 파일 읽기
+'''
+read_excel("파일이름","sheet이름","인덱스컬럼")
+'''
+
+
+df = pd.read_excel("data/sales_2015.xlsx",sheet_name=None,index_col=None)
+df
+type(df) #딕셔너리 객체 데이터 
+'''
+  {"sheet이름":dataframe 데이터,...}
+'''
+df_all=pd.DataFrame([])
+for name, data   in df.items() :
+    # print("sheet name", name)
+    # print("data 자료형", type(data))
+    df_all = pd.concat([df_all, data], axis=0) #row(index) 합친다 
+
+df_all.info()
+df_all.Amount
+df_all.columns= ['ID', 'Name', 'Invoice','Amount','Date'] 
+
+#['Customer ID', 'Customer Name', 'Invoice Number', 'Sale Amount',"Purchase Date']
+
+##### 조건에 의한 조회
+#Sale Amount 컬럼의 값이 500보다 큰 레코드만 조회
+# 조건에 해당하는 index:row를 프린트 한다 
+df_500=df_all[df_all["Amount"] > 500]
+df_all.loc[df_all["Amount"] > 500]
+
+#매입일자가 2015-03-17일 정보만 조회하기
+df_all[df_all["Date"] == '2015-03-17']
+df_0317 = df_all[df_all["Date"] == '2015-03-17']
+df_0317
+
+
+#df500데이터를 pd_sale_2015.xlsx 파일의
+# 2015_500 sheet로 저장하기
+
+#내용 없는 파일
+outexcel = pd.ExcelWriter("data/pd_sale_2015.xlsx")
+# 전체파일에 sheet를 추가 하여 저장 한다 
+df_500.to_excel(outexcel, sheet_name="2015_500", index=False)
+df_all.to_excel(outexcel, sheet_name="2015", index=False)
+df_0317.to_excel(outexcel, sheet_name="0317", index=False)
+outexcel._save()    #save() 에서 수정 되었
+
+
+##################################################
+# titanic 데이터셋 연습(데이터 전처리)
+# seaborn 모듈에 저장된 데이터
+'''
+survived	생존여부
+pclass	좌석등급 (숫자)
+sex	성별 (male, female)
+age	나이
+sibsp	형제자매 + 배우자 인원수
+parch: 	부모 + 자식 인원수
+fare: 	요금
+embarked	탑승 항구
+class	좌석등급 (영문)
+who	성별 (man, woman)
+adult_male 성인남자여부 
+deck	선실 고유 번호 가장 앞자리 알파벳
+embark_town	탑승 항구 (영문)
+alive	생존여부 (영문)
+alone	혼자인지 여부
+'''
+
+#seaborn 모듈에 저장된 데이터셋 목록
+print(sns.get_dataset_names())
+#titanic데이터 로드. 
+titanic = sns.load_dataset("titanic")
+titanic.info()
+#
+titanic.head(10)
+titanic
+#pclass,class 데이터만 조회하기
+titanic[["pclass","class"]].head()
+
+#컬럼별 건수 조회하기
+titanic.count() #결측값을 제외한 데이터
+# 건수 중 가장 작은 값 조회하기
+titanic.count().min()
+# 건수 중 가장 작은 값의 인덱스 조회하기
+titanic.count().idxmin()  #deck
+type(titanic.count())
+
+#titanic의 age,fare 컬럼만을 t_df 데이터셋에 저장하기
+t_df=titanic[['age','fare']]
+t_df.info()
+
+#df 데이터의 평균 데이터 조회
+t_df.mean()
+#df 데이터의 최대나이와 최소나이 조회
+t_df.age.max()
+t_df.age.min()
+#나이별 인원수를 조회. 최대 인원수를 가진 5개의 나이 조회
+
+#값의 갯수. 내림차순 정렬하여 조회 
+t_df.age.value_counts()
+t_df.age.value_counts().head()
+
+#인원수가 많은 나이 10개 조회 
+t_df.age.value_counts().head(10)
+
+
+
+
+
+
+
+
+
+
+    
