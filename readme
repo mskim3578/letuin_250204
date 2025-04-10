@@ -17,6 +17,12 @@ exam_data={"이름":["서준","우현","인아"],
            "체육":[100,90,90]}
 
 
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+import numpy as np
+
+
 ##################################################
 # titanic 데이터셋 연습(데이터 전처리)
 # seaborn 모듈에 저장된 데이터
