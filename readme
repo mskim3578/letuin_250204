@@ -1,4 +1,10 @@
-   
+plt.rcParams['axes.unicode_minus'] = False
+plt.rc("font",family="Malgun Gothic")     
+
+
+
+
+
 df = pd.DataFrame([[15,'남','서울중'],[17,'여','서울여고'],
                    [17,'남','서울고']])
 
