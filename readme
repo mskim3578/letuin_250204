@@ -1,3 +1,18 @@
+
+'''
+mpg : 연비
+cylinders : 실린더 수
+displacement : 배기량
+horsepower : 출력
+weight : 차량무게
+acceleration : 가속능력
+model_year : 출시년도
+origin : 제조국
+name : 모델명
+'''
+
+
+
 plt.rcParams['axes.unicode_minus'] = False
 plt.rc("font",family="Malgun Gothic")     
 
