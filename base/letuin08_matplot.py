@@ -222,25 +222,7 @@ df.origin.unique()
 df.origin.value_counts()
 
 
-plt.pie(df.origin.value_counts(), labels=df.origin.unique(), autopct='%1.1f%%', 
+plt.pie(df.origin.value_counts(), labels=[], autopct='%1.1f%%', 
     colors=['gold', 'lightblue', 'lightcoral', 'lightgreen'])
 plt.title("Pie Chart Example")
 plt.show()
-
-
-df.shape #(398,9)
-#모든 컬럼의 자료형을 조회하기
-df.dtypes
-
-#데이터의 mpg,weight 컬럼의 최대값 조회하기
-df.mpg.max() #46.6
-df.weight.max() #5140
-df[['mpg','weight']].max()
-
-#최대 연비를 가진 자동차의 정보 조회하기
-df[df['mpg']==df['mpg'].max()]
-df.loc[df['mpg']==df['mpg'].max()]
-df.iloc[df['mpg'].idxmax()]
-
-# 데이터의 컬럼간의 상관계수 조회하기
-df[['mpg','weight']].corr()
