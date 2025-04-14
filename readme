@@ -1,3 +1,7 @@
+
+url = "http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/"
+
+
 '''
   선형회귀그래프(regplot) : 산점도+회귀선 표시
   회귀선 : 모든점에서 가장 가까운 점들을 선으로 표시.
