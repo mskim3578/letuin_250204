@@ -55,10 +55,42 @@ model = Sequential([
     Dense(units=32,activation='relu'),
     Dense(units=10,activation='softmax')    #이중분류 사용. 
     ])
-
 model.compile(optimizer="adam", 
               loss='categorical_crossentropy',
               metrics=['acc'])
+
+history = model.fit(x_train,fy_train,
+                    epochs=30,
+                    batch_size=127,
+                    validation_data=(x_val,fy_val))
+
+
+import matplotlib.pyplot as plt
+plt.figure(figsize=(12, 4))
+plt.subplot(1, 2, 1)
+#'b-' : blue 실선
+plt.plot(history.history['loss'], 'b-', label='loss')
+#'r--' : red, 점선
+plt.plot(history.history['val_loss'], 'r--', 
+         label='val_loss') 
+plt.xlabel('Epoch')
+plt.legend()
+
+plt.subplot(1, 2, 2)
+plt.plot(history.history['acc'], 'b-', 
+         label='acc') 
+plt.plot(history.history['val_acc'], 'r--',\
+         label='val_acc')
+plt.xlabel('Epoch') 
+plt.ylim(0.7, 1) 
+plt.legend()
+
+results = model.predict(x_test)
+
+#한개이미지 예측하기
+
+
+
 
 
 
