@@ -1,3 +1,19 @@
+
+# 저장
+np.save('x_train.npy', x_train)
+np.save('y_train.npy', y_train)
+np.save('x_test.npy', x_test)
+np.save('y_test.npy', y_test)
+
+# 불러오기
+x_train = np.load('x_train.npy')
+y_train = np.load('y_train.npy')
+x_test = np.load('x_test.npy')
+y_test = np.load('y_test.npy')
+
+
+
+
 #0~59999 사이의 임의의 수 3개
 random_idx = np.random.randint(60000,size=3) 
 for idx in random_idx :
