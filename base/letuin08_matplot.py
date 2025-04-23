@@ -180,6 +180,30 @@ plt.tight_layout()
 plt.show()
 
 
+####  2개의 y구간 정의 그래프 그리기
+
+# 시각화
+plt.figure(figsize=(12, 6))
+fig, ax1 = plt.subplots()
+ax1.bar(df_mean_yield.EQPID_CHAID, df_mean_yield.Yield)
+ax1.set_ylabel('ax1', color='b')
+ax1.set_ylim(0, 160) 
+ax1.set_xticks(df_mean_yield.EQPID_CHAID.to_list())
+ax1.set_xticklabels(df_mean_yield.EQPID_CHAID.to_list(), rotation=45)  # <- 여기서 회전 설정!
+ax2=ax1.twinx()
+
+ax2.plot(df_mean_yield.EQPID_CHAID, df_mean_yield.pressure)
+ax2.tick_params(axis='y', labelcolor='r')
+ax1.set_ylabel('ax2', color='b')
+ax2.set_ylim(0, 1.75) 
+
+plt.title("Average Yield per HDP_DEPO (EQPID + Chamber)")
+
+plt.tight_layout()
+plt.show()
+
+
+
 #자동차 연비데이터의 mpg 값을 히스토그램으로 출력하기
 df=sns.load_dataset("mpg")
 df.info()
