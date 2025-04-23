@@ -1,3 +1,5 @@
+https://open.kakao.com/o/sRrsFArh
+
 (x_train, y_train),(x_test, y_test)=load_data(path='mnist.npz')
 # 저장
 np.save('x_train.npy', x_train)
