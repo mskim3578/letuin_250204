@@ -180,34 +180,6 @@ plt.tight_layout()
 plt.show()
 
 
-####  2개의 y구간 정의 그래프 그리기
-
-
-x = np.linspace(0, 10, 10).astype(int)
-y1 = np.random.rand(10)
-y2 = np.random.rand(10)*100//10
-y2=y2.astype(int)
-
-
-
-plt.figure(figsize=(12, 6))
-fig, ax1 = plt.subplots()
-ax1.bar(x, y1)
-ax1.set_ylabel('ax1', color='b')
-#ax1.set_ylim(0, 160) 
-ax1.set_xticks(x)
-ax1.set_xticklabels(x, rotation=45)  # <- 여기서 회전 설정!
-ax2=ax1.twinx()
-
-ax2.plot(x, y2)
-ax2.tick_params(axis='y', labelcolor='r')
-ax1.set_ylabel('ax2', color='b')
-#ax2.set_ylim(0, 1.75) 
-
-plt.title("Average Yield per HDP_DEPO (EQPID + Chamber)")
-
-plt.tight_layout()
-plt.show()
 
 
 
