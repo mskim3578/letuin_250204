@@ -1,4 +1,4 @@
-https://open.kakao.com/o/sRrsFArh
+
 
 (x_train, y_train),(x_test, y_test)=load_data(path='mnist.npz')
 # 저장
@@ -41,7 +41,7 @@ from sklearn.metrics import \
     classification_report,confusion_matrix
 
 
-https://open.kakao.com/o/sRrsFArh
+
 
 '''
 1 - fixed acidity : 주석산농도
