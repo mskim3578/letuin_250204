@@ -1,3 +1,70 @@
+#################  250428
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+import os
+
+#4. 소자 자료 읽기   
+# data2_temp folder
+# 4-1 폴더 아래의 모든 파일 읽기 
+
+file_count=0
+df_data=pd.DataFrame([])
+
+def read_folder(dirname):
+    global file_count
+    global df_data
+    
+    folder_list = os.listdir(dirname)
+    for f_folder in folder_list:
+        
+        if os.path.isdir(dirname+"/"+f_folder):
+            read_folder(dirname+"/"+f_folder)
+        else: 
+            # print(dirname+"/"+f_folder)
+            read_file(dirname+"/"+f_folder)
+   
+def read_file(filename):
+    # print(filename+"********")
+    read_data=pd.read_csv(filename, header=None)
+    print(read_data.iloc[9][2]
+          ,read_data.iloc[12][2]
+          ,read_data.iloc[2][7]
+          )
+    # read_data.info()
+    col1 = read_data.iloc[16][7:].to_list()
+    col2 = read_data.iloc[26][:7].to_list()
+    print(col1)
+    print(col2)
+    
+    
+read_folder('data2_temp')     #['2022.01.21', '2022.01.26', '2022.02.18']
+# tempcsv='data2_temp/2022.02.18/2002100/STA2050-01_LETUIN600_R00_2002100_25_220218_040237.csv'
+read_file(tempcsv)
+
+
+==============================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 (x_train, y_train),(x_test, y_test)=load_data(path='mnist.npz')
